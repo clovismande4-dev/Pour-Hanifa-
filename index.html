@@ -1,4 +1,4 @@
-     <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -55,10 +55,11 @@
     }
     
     p.joke {
-      font-size: 12px;
+      font-size: 13px;
       font-style: italic;
-      color: #a08e8c;
-      margin-bottom: 25px;
+      color: #701c27;
+      margin-bottom: 20px;
+      font-weight: bold;
     }
     
     .btn-container {
@@ -214,11 +215,10 @@
     <div class="heart-icon">🙌🏽</div>
     <div class="subtitle">La vraie question</div>
     <h1>Ça te dit jeudi prochain à 19h00 🙌🏽 ?</h1>
-    <p class="joke" id="joke-text">(Cette fois, plus de feinte ! 😉)</p>
+    <p class="joke" id="joke-text">Pense bien à moi sinon ça ne marchera pas 🤣</p>
     
-    <div class="btn-container" style="flex-direction: row;">
-      <button class="btn-primary" onclick="nextStep(7, 8)">Oui avec grand plaisir ! ❤️</button>
-      <button class="btn-option" id="btn-non" style="width: auto;" onclick="handleNo()">Non</button>
+    <div class="btn-container">
+      <button class="btn-primary" id="btn-oui" onclick="handleYes()">Oui avec grand plaisir ! ❤️</button>
     </div>
   </div>
 
@@ -250,25 +250,26 @@
   </div>
 
   <script>
-    let clickCount = 0;
-    const jokes = [
-      "Oups... Mauvaise touche ! 😜",
-      "Tu es sûre ? Le bouton 'Oui' est juste à côté ! 🥺",
-      "Le bouton 'Non' ne marche pas ! 😂",
-      "Allez, clique sur 'Oui' maintenant ❤️"
+    let yesClickCount = 0;
+    const yesMessages = [
+      "Oups, ça a buggé ! Pense à moi sinon ça ne marchera pas 🤣",
+      "Toujours pas ! Concentre-toi sur moi ❤️",
+      "Mais non ! Tu penses vraiment à moi là ? 🤔",
+      "Allez, encore un effort, pense fort à moi ! 🥰"
     ];
 
-    function handleNo() {
-      const btnNo = document.getElementById('btn-non');
+    function handleYes() {
       const jokeText = document.getElementById('joke-text');
+      const btnOui = document.getElementById('btn-oui');
       
-      clickCount++;
-      if (clickCount < jokes.length) {
-        jokeText.innerText = jokes[clickCount];
-        btnNo.style.transform = `scale(${1 - clickCount * 0.22})`;
+      yesClickCount++;
+      
+      if (yesClickCount < 4) {
+        jokeText.innerText = yesMessages[yesClickCount - 1];
+        btnOui.style.transform = `scale(${1 - yesClickCount * 0.05})`;
       } else {
-        btnNo.style.display = 'none';
-        jokeText.innerText = "Voilà, tu n'as plus le choix ! 😁";
+        // Au 4ème clic, ça valide et passe à l'étape suivante !
+        nextStep(7, 8);
       }
     }
 
@@ -283,4 +284,5 @@
     }
   </script>
 </body>
-</html>
+     </html>
+     
