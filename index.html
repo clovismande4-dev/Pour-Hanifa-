@@ -233,20 +233,7 @@
     </div>
 
     <textarea id="user-note" placeholder="Un petit mot pour moi... (facultatif)"></textarea>
-    <button class="btn-primary" onclick="finish()">Confirmer notre rendez-vous ✨</button>
-  </div>
-
-  <!-- ÉTAPE FINALE : Confirmation -->
-  <div class="card hidden" id="stepFinal">
-    <div class="heart-icon">💖</div>
-    <div class="subtitle">C'est officiel !</div>
-    <h1>C'est noté mon amour !</h1>
-    <p style="color: #701c27; font-weight: bold; margin-top: 15px; font-size: 16px;">
-      Jeudi prochain à 19h00.
-    </p>
-    <p style="margin-top: 15px; color: #555; font-size: 14px; line-height: 1.5;">
-      J'ai hâte de passer ce moment unique avec toi (et juste toi 😉). 🥰
-    </p>
+    <button class="btn-primary" onclick="sendWhatsApp()">Confirmer sur WhatsApp ✨</button>
   </div>
 
   <script>
@@ -268,7 +255,6 @@
         jokeText.innerText = yesMessages[yesClickCount - 1];
         btnOui.style.transform = `scale(${1 - yesClickCount * 0.05})`;
       } else {
-        // Au 4ème clic, ça valide et passe à l'étape suivante !
         nextStep(7, 8);
       }
     }
@@ -278,11 +264,18 @@
       document.getElementById('step' + next).classList.remove('hidden');
     }
 
-    function finish() {
-      document.getElementById('step8').classList.add('hidden');
-      document.getElementById('stepFinal').classList.remove('hidden');
+    function sendWhatsApp() {
+      const myPhoneNumber = "22664414494"; 
+      const userNote = document.getElementById('user-note').value;
+      
+      let text = "C'est confirmé pour jeudi prochain à 19h00 ! ❤️\n";
+      if (userNote.trim() !== "") {
+        text += "Mon petit mot : " + userNote;
+      }
+      
+      const whatsappUrl = `https://wa.me/${myPhoneNumber}?text=${encodeURIComponent(text)}`;
+      window.location.href = whatsappUrl;
     }
   </script>
 </body>
-     </html>
-     
+</html>
